@@ -23,6 +23,18 @@
 * Docker-compose - две сборки  devop и production (инструкция ниже)
 
 ### Установка приложения
-#### Разработка
-1)docker-compose up --build  
-2)docker
+#### Разработка  
+Django server, пользователь root
+1) docker-compose up --build  
+2) docker-compose exec web sh  
+3) python manage.py makemigrations  
+4) python manage.py migrate  
+5) python manage.py createsuperuser  
+#### Production  
+Nginx, gunicorn, создаем пользователя valery и др. настройки  
+1)docker-compose -f docker-compose.prod.yaml up -d --build  
+2)docker-compose -f docker-compose.prod.yaml exec web sh  
+3) python manage.py makemigrations  
+4) python manage.py migrate  
+5) python manage.py createsuperuser  
+6) python manage.py collectstatic
