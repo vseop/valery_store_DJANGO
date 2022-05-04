@@ -32,8 +32,8 @@ Django server, пользователь root
 5) python manage.py createsuperuser  
 #### Production  
 Nginx, gunicorn, создаем пользователя valery и др. настройки  
-1)docker-compose -f docker-compose.prod.yaml up -d --build  
-2)docker-compose -f docker-compose.prod.yaml exec web sh  
+1) docker-compose -f docker-compose.prod.yaml up -d --build  
+2) docker-compose -f docker-compose.prod.yaml exec web sh  
 3) python manage.py makemigrations  
 4) python manage.py migrate  
 5) python manage.py createsuperuser  
