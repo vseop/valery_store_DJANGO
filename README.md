@@ -30,7 +30,7 @@ Django server, пользователь root
 3) python manage.py makemigrations  
 4) python manage.py migrate  
 5) python manage.py createsuperuser  
-localhost:8000
+6) В браузере localhost:8000
 #### Production  
 Nginx, gunicorn, создаем пользователя valery и др. настройки  
 1) docker-compose -f docker-compose.prod.yaml up -d --build  
@@ -38,7 +38,7 @@ Nginx, gunicorn, создаем пользователя valery и др. нас�
 3) python manage.py makemigrations  
 4) python manage.py migrate  
 5) python manage.py createsuperuser  
-6) python manage.py collectstatic
-Nginx - наружу открыт порт 1337 , для проверки localhost:1337 
+6) python manage.py collectstatic  
+7) В браузере localhost:1337 (Nginx - наружу открыт порт 1337) 
 
 Заказ успешно сдан - https://dobro1812.ru/
