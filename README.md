@@ -38,3 +38,5 @@ Nginx, gunicorn, создаем пользователя valery и др. нас�
 4) python manage.py migrate  
 5) python manage.py createsuperuser  
 6) python manage.py collectstatic
+
+Заказ успешно сдан - https://dobro1812.ru/
