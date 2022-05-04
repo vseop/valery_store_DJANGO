@@ -1,0 +1,36 @@
+
+FROM python:3.9-alpine
+
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+RUN mkdir -p /home/app
+
+RUN addgroup -S valery && adduser -S valery -G valery
+
+ENV HOME=/home/app
+ENV APP_HOME=/home/app/web
+RUN mkdir $APP_HOME
+WORKDIR $APP_HOME
+
+COPY ./req.txt .
+
+RUN apk update \
+    && apk add --virtual .tmp gcc python3-dev musl-dev postgresql-dev jpeg-dev zlib-dev \
+    && apk add libjpeg libpq\
+    && pip install --upgrade pip  \
+    && pip install --no-cache-dir -r req.txt \
+    && apk del .tmp
+
+
+COPY ./entrypoint.prod.sh $APP_HOME
+RUN chmod +x ./entrypoint.prod.sh
+
+COPY . $APP_HOME
+
+RUN chown -R valery:valery $APP_HOME
+
+USER valery
+
+ENTRYPOINT ["/home/app/web/entrypoint.prod.sh"]

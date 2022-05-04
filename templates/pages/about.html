@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}{{ flatpage.title }}{% endblock %}
+
+
+{% block content %}
+<div class="container-lg">
+    <div class="row">
+        {{flatpage.newflatpage.description|safe}}
+    </div>
+</div>
+{% endblock %}
