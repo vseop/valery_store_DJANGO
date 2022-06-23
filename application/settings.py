@@ -37,6 +37,7 @@ INSTALLED_APPS = [
 
     'flatpage_main',
     'store',
+    'analytics'
 ]
 
 MIDDLEWARE = [

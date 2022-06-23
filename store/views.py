@@ -1,9 +1,12 @@
 from django.db.models import Q, Count
 from django.views.generic import DetailView, ListView
+from django.utils.decorators import method_decorator
 
 from .models import *
+from analytics.decorators import counted
 
 
+@method_decorator(counted, name='dispatch')
 class BaseView(ListView):
     """Главная страница"""
     model = Product
@@ -51,6 +54,7 @@ class CategoryView(BaseView):
         context['title'] = Category.objects.get(slug=self.kwargs['category_slug'])
         return context
 
+
 class SubCategoryViewAll(BaseView):
     """Товары любой категории в подкатегории Все """
 
@@ -63,11 +67,11 @@ class SubCategoryViewAll(BaseView):
         # return Product.objects_shop.filter(Q(category__id__in=ids) | Q(category=cat))
         return Product.objects_shop.filter(product_parent_category=self.kwargs['category_slug'])
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = Category.objects.get(slug=self.kwargs['category_slug'])
         return context
+
 
 class ProductDetailView(DetailView):
     model = Product
@@ -82,6 +86,7 @@ class ProductDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['title'] = context['product']
         return context
+
 
 class Search(BaseView):
     """Поиск товара"""
@@ -99,4 +104,3 @@ class Search(BaseView):
         context["q"] = f'q={self.request.GET.get("q")}&'
         context['title'] = f'Результаты поиска: {self.request.GET.get("q")}'
         return context
-
