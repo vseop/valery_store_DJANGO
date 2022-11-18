@@ -17,7 +17,7 @@ def get_client_ip(request):
 
 
 def counted(f):
-    """ Cчетчик обычных и уникальных посещений """
+    """ Cчетчик обычных и уникальных посещений (декоратор) """
     @wraps(f)
     def decorator(request, *args, **kwargs):
         with transaction.atomic():

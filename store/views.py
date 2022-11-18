@@ -6,16 +6,12 @@ from .models import *
 from analytics.decorators import counted
 
 
-@method_decorator(counted, name='dispatch')
 class BaseView(ListView):
-    """Главная страница"""
+    """Базовый миксин"""
     model = Product
     template_name = "base.html"
     context_object_name = 'products'
     paginate_by = 8
-
-    def get_queryset(self):
-        return Product.objects_shop.filter(main_page=True)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -23,6 +19,19 @@ class BaseView(ListView):
         count_all = Product.objects.filter(draft=False).count()
         context['categories'] = categories
         context['count_all'] = count_all
+        # context['title'] = 'Главная страница'
+        return context
+
+
+@method_decorator(counted, name='dispatch')
+class MainView(BaseView):
+    """Главная страница"""
+
+    def get_queryset(self):
+        return Product.objects_shop.filter(main_page=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         context['title'] = 'Главная страница'
         return context
 

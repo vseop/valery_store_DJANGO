@@ -1,9 +1,9 @@
 from django.urls import path
 
-from .views import BaseView, CategoryView, ProductDetailView, AllProdView, Search, SubCategoryViewAll
+from .views import MainView, CategoryView, ProductDetailView, AllProdView, Search, SubCategoryViewAll
 
 urlpatterns = [
-    path('', BaseView.as_view(), name='base'),
+    path('', MainView.as_view(), name='base'),
     path('all/', AllProdView.as_view(), name='all'),
     path("search/", Search.as_view(), name='search'),
     path('<str:category_slug>/', CategoryView.as_view(), name='category_detail'),
