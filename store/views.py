@@ -19,7 +19,6 @@ class BaseView(ListView):
         count_all = Product.objects.filter(draft=False).count()
         context['categories'] = categories
         context['count_all'] = count_all
-        # context['title'] = 'Главная страница'
         return context
 
 

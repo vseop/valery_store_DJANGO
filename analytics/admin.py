@@ -15,3 +15,7 @@ class DayAnalyticsAdmin(admin.ModelAdmin):
 class AllAnalyticsAdmin(admin.ModelAdmin):
     readonly_fields = ('count_all', 'count_all_id')
     list_display = ('count_all', 'count_all_id')
+
+@admin.register(UserIp)
+class UserIpAdmin(admin.ModelAdmin):
+    list_display = ('ip', )
