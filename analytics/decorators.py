@@ -1,3 +1,4 @@
+from datetime import datetime
 from functools import wraps
 from django.db.models import F
 from django.db import transaction
@@ -21,7 +22,7 @@ def counted(f):
     @wraps(f)
     def decorator(request, *args, **kwargs):
         with transaction.atomic():
-            counter, _ = DayAnalytics.objects.get_or_create()
+            counter, _ = DayAnalytics.objects.get_or_create(day=datetime.today())
             counter_all, _ = AllAnalytics.objects.get_or_create()
             ip = get_client_ip(request)
             if not UserIp.objects.filter(ip=ip):

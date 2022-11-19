@@ -2,8 +2,8 @@ from django.db.models import Q, Count
 from django.views.generic import DetailView, ListView
 from django.utils.decorators import method_decorator
 
-from .models import *
 from analytics.decorators import counted
+from store.models import Product, Category
 
 
 class BaseView(ListView):
